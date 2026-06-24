@@ -15,12 +15,6 @@ def show():
     </div>
     """, unsafe_allow_html=True)
 
-    # ── Metrics ───────────────────────────────────────────────────────────────
-    c1, c2, c3 = st.columns(3)
-    c1.metric("R² Score ANN", "76.16%", "+9.16% vs Linear Regression")
-    c2.metric("MAE Test",     "4.518",  delta=None)
-    c3.metric("RMSE Test",    "5.716",  delta=None)
-
     st.divider()
 
     # ── Background ────────────────────────────────────────────────────────────
@@ -65,15 +59,6 @@ def show():
         affecting student productivity. Without an accurate predictive model,
         it is difficult to provide data-driven recommendations for both
         students and educators.
-
-        **Key questions this project addresses:**
-
-        - Which features have the strongest influence on student productivity?
-        - How accurately can an ANN predict the Productivity Score?
-        - Can ANN outperform classical ML models like XGBoost on
-          medium-scale tabular data?
-        - What is the relationship between study habits, lifestyle,
-          and academic productivity?
         """)
         
     st.divider()

@@ -18,17 +18,6 @@ def get_category(score):
     else:
         return 'LOW', '🔴', '#dc3545', 'linear-gradient(135deg, #7a1a1a, #dc3545)'
 
-def get_recommendation(sleep, stress, motivation, attendance, screen, study, social):
-    recom = []
-    if study < 3:       recom.append(("📖", "Study Hours",    "Increase your study time by at least 3–4 hours a day for optimal results."))
-    if attendance < 75: recom.append(("📅", "Attendance",      "Maintain an attendance rate of at least 75% so you don’t miss any material."))
-    if sleep < 7:       recom.append(("😴", "Sleep",          "Getting 7–8 hours of sleep per night is essential for concentration while studying."))
-    if stress > 7:      recom.append(("🧘", "Stress",          "Manage stress through meditation, light exercise, or counseling."))
-    if motivation < 5:  recom.append(("🔥", "Motivation",       "Set small, short-term academic goals to stay motivated."))
-    if screen > 6:      recom.append(("📵", "Screen Time",    "Limit screen time to a maximum of 4 hours per day outside of school hours."))
-    if social > 4:      recom.append(("📱", "Social Media",   "Cut back on social media—focus on academic productivity."))
-    return recom if recom else [("🌟", "Amazing!”, “All the indicators are looking great. Keep it up!")]
-
 def card(title, color="#1e2a3a", border="#357abd"):
     return f"""
     <div style='background:{color}; padding:18px 20px; border-radius:12px;
@@ -55,21 +44,21 @@ def show():
     st.markdown("""
     <div style='display:flex; align-items:center; gap:10px; margin-bottom:16px;'>
         <div style='background:#1f3c88; width:4px; height:28px; border-radius:2px;'></div>
-        <h3 style='color:white; margin:0;'>👤 Basic Information</h3>
+        <h3 style='color:white; margin:0;'>Basic Information</h3>
     </div>
     """, unsafe_allow_html=True)
 
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
-        age = st.number_input("🎂 Age", min_value=15, max_value=30, value=20)
+        age = st.number_input("Age", min_value=15, max_value=30, value=20)
     with col2:
-        gender = st.selectbox("⚧ Gender", ["Male", "Female"])
+        gender = st.selectbox("Gender", ["Male", "Female"])
     with col3:
-        internet_quality = st.selectbox("🌐 Internet Quality", ["Poor", "Average", "Good"])
+        internet_quality = st.selectbox("Internet Quality", ["Poor", "Average", "Good"])
     with col4:
-        part_time_job = st.selectbox("💼 Part Time Job", ["No", "Yes"])
+        part_time_job = st.selectbox("Part Time Job", ["No", "Yes"])
     with col5:
-        extracurricular = st.selectbox("🎭 Extracurricular",
+        extracurricular = st.selectbox("Extracurricular",
                                         [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -78,40 +67,40 @@ def show():
     st.markdown("""
     <div style='display:flex; align-items:center; gap:10px; margin-bottom:16px;'>
         <div style='background:#28a745; width:4px; height:28px; border-radius:2px;'></div>
-        <h3 style='color:white; margin:0;'>📚 Academic Performance</h3>
+        <h3 style='color:white; margin:0;'>Academic Performance</h3>
     </div>
     """, unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        study_hours   = st.slider("📖 Study Hours / Day",        0.0, 12.0, 6.0, 0.5)
-        attendance    = st.slider("📅 Attendance (%)",           0, 100, 80, 1)        # ← integer
+        study_hours   = st.slider("Study Hours / Day",        0.0, 12.0, 6.0, 0.5)
+        attendance    = st.slider("Attendance (%)",           0, 100, 80, 1)        # ← integer
     with col2:
-        assignments   = st.slider("📝 Assignments Completed (%)", 0, 100, 75, 1)       # ← max 100, integer
-        participation = st.slider("🙋 Class Participation",      0.0, 10.0, 7.0, 0.1)
+        assignments   = st.slider("Assignments Completed (%)", 0, 100, 75, 1)       # ← max 100, integer
+        participation = st.slider("Class Participation",      0.0, 10.0, 7.0, 0.1)
     with col3:
-        prev_gpa      = st.slider("🎓 Previous GPA",             0.0, 4.0, 3.0, 0.1)
-        ai_usage      = st.slider("🤖 AI Tool Usage (hrs/week)", 0.0, 10.0, 2.0, 0.5)
+        prev_gpa      = st.slider("Previous GPA",             0.0, 4.0, 3.0, 0.1)
+        ai_usage      = st.slider("AI Tool Usage (hrs/week)", 0.0, 10.0, 2.0, 0.5)
     st.markdown("<br>", unsafe_allow_html=True)
 
     # SECTION 3 — Lifestyle & Wellbeing
     st.markdown("""
     <div style='display:flex; align-items:center; gap:10px; margin-bottom:16px;'>
         <div style='background:#e83e8c; width:4px; height:28px; border-radius:2px;'></div>
-        <h3 style='color:white; margin:0;'>🧠 Lifestyle & Wellbeing</h3>
+        <h3 style='color:white; margin:0;'>Lifestyle & Wellbeing</h3>
     </div>
     """, unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        sleep_hours  = st.slider("😴 Sleep Hours / Night",       4.0, 12.0, 7.0, 0.5)
-        stress_level = st.slider("😰 Stress Level (1–10)",       1, 10, 5)
+        sleep_hours  = st.slider("Sleep Hours / Night",       4.0, 12.0, 7.0, 0.5)
+        stress_level = st.slider("Stress Level (1–10)",       1, 10, 5)
     with col2:
-        motivation   = st.slider("🔥 Motivation Level (1–10)",   1, 10, 7)
-        screen_time  = st.slider("📱 Screen Time (hrs/day)",     0.0, 12.0, 3.0, 0.5)
+        motivation   = st.slider("Motivation Level (1–10)",   1, 10, 7)
+        screen_time  = st.slider("Screen Time (hrs/day)",     0.0, 12.0, 3.0, 0.5)
     with col3:
-        social_media = st.slider("💬 Social Media (hrs/day)",    0.0, 12.0, 2.0, 0.5)
-        physical_act = st.slider("🏃 Physical Activity (hrs/week)", 0.0, 20.0, 5.0, 0.5)
+        social_media = st.slider("Social Media (hrs/day)",    0.0, 12.0, 2.0, 0.5)
+        physical_act = st.slider("Physical Activity (hrs/week)", 0.0, 20.0, 5.0, 0.5)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -203,40 +192,3 @@ def show():
             st.markdown("</div>", unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
-
-        # Recommendation 
-        st.markdown("""
-        <div style='display:flex; align-items:center; gap:10px; margin-bottom:16px;'>
-            <div style='background:#ffc107; width:4px; height:28px; border-radius:2px;'></div>
-            <h3 style='color:white; margin:0;'>💡 Personal Recommendation</h3>
-        </div>
-        """, unsafe_allow_html=True)
-
-        rekoms = get_recommendation(sleep_hours, stress_level, motivation,
-                                  attendance, screen_time, study_hours, social_media)
-
-        n_cols = min(len(rekoms), 3)
-        cols   = st.columns(n_cols)
-        for i, (icon_r, judul, pesan) in enumerate(rekoms):
-            with cols[i % n_cols]:
-                st.markdown(f"""
-                <div style='background:#0d1b2a; padding:18px; border-radius:12px;
-                            border:1px solid #2a4a8a; margin-bottom:12px;
-                            box-shadow: 0 2px 10px rgba(0,0,0,0.2);'>
-                    <div style='font-size:1.8rem; margin-bottom:8px;'>{icon_r}</div>
-                    <h4 style='color:#8fb3e8; margin:0 0 6px 0; font-size:0.9rem;
-                                text-transform:uppercase; letter-spacing:1px;'>{judul}</h4>
-                    <p style='color:#ced4da; margin:0; font-size:0.85rem;
-                               line-height:1.5;'>{pesan}</p>
-                </div>
-                """, unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        # Input Details
-        with st.expander("📄 View input details"):
-            summary_df = pd.DataFrame({
-                'Feature': list(input_dict.keys()),
-                'Value': [str(v) for v in input_dict.values()]
-            })
-            st.dataframe(summary_df, use_container_width=True, hide_index=True)

@@ -52,19 +52,7 @@ def get_category(score: float) -> tuple:
         return 'MEDIUM', '⚠️', 'warning'
     else:
         return 'LOW', '❌', 'error'
-
-#   Recommendation for student
-def get_recommendation(sleep, stress, motivation, attendance, screen, study, social) -> list:
-    recom = []
-    if study < 3:       recom.append(("📖", "Study Hours",  "Increase your study time by at least 3–4 hours a day for optimal results."))
-    if attendance < 75: recom.append(("📅", "Attendance",   "Maintain an attendance rate of at least 75% so you don't miss any material."))
-    if sleep < 7:       recom.append(("😴", "Sleep",        "Getting 7–8 hours of sleep per night is essential for concentration."))
-    if stress > 7:      recom.append(("🧘", "Stress",       "Manage stress through meditation, light exercise, or counseling."))
-    if motivation < 5:  recom.append(("🔥", "Motivation",   "Set small, short-term academic goals to stay motivated."))
-    if screen > 6:      recom.append(("📵", "Screen Time",  "Limit screen time to a maximum of 4 hours per day."))
-    if social > 4:      recom.append(("📱", "Social Media", "Cut back on social media—focus on academic productivity."))
-    return recom if recom else [("🌟", "Amazing!", "All indicators are great. Keep it up!")]
-
+    
 # Evaluation Metrics (Test Set)
 def get_metrics_dict() -> dict:
     return {
@@ -83,3 +71,7 @@ def get_feature_importance() -> pd.DataFrame:
         'Feature':    feature_names,
         'Importance': xgb.feature_importances_
     }).sort_values('Importance', ascending=False).reset_index(drop=True)
+    
+@st.cache_resource
+def load_xgboost():
+    return joblib.load(os.path.join(MODEL_DIR, 'xgboost.pkl')) 
