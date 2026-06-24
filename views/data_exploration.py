@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 @st.cache_data
 def load_data():
     path = os.path.join(BASE_DIR, 'data', 'Student_Productivity_Dataset.csv')
-    df   = pd.read_csv(path)
+    df   = pd.read_csv("data/Student_Productivity_Dataset.csv")
     df.drop(columns=['Student_ID', 'Performance_Category'], errors='ignore', inplace=True)
     return df
 #beberapa kolom dihapus karena tidak dibutuhkan
